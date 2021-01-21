@@ -17,6 +17,17 @@ public class Payment {
     private String paymentAction;
     private String student; //학생정보 관리를 위한 student 정보 추가
 
+    @PrePersist
+    public void onPrePersist() {
+
+        try {
+            //istio test를 위해 payment sleep 추가
+            Thread.sleep((long) (400 + Math.random() * 220));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @PostPersist
     public void onPostPersist(){
         PaymentApproved paymentApproved = new PaymentApproved();
@@ -30,12 +41,6 @@ public class Payment {
                 paymentApproved.publish();
             }
         });
-        try {
-            //istio test를 위해 payment sleep 추가
-           Thread.sleep((long) (400 + Math.random() * 220));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
