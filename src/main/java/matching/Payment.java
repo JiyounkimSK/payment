@@ -22,7 +22,7 @@ public class Payment {
 
         try {
             //istio test를 위해 payment sleep 추가
-            Thread.sleep((long) (400 + Math.random() * 220));
+            Thread.currentThread().sleep((long) (400 + Math.random() * 220));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
